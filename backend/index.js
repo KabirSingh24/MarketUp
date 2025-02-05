@@ -9,6 +9,7 @@ const { HoldingsModel } = require("./model/HoldingsModel");
 
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
+const User = require("./model/User");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
@@ -209,6 +210,40 @@ app.post("/newOrder", async (req, res) => {
 
   res.send("Order saved!");
 });
+
+// mongoose.connect("mongodb://127.0.0.1:27017/marketup");
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch(err => console.error("MongoDB connection error:", err));
+
+  app.post('/signup', (req, res) => {
+    User.create(req.body)
+      .then(user => res.json(user))
+      .catch(err => res.json(err));
+  });
+
+  app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+  
+    try {
+      const user = await User.findOne({ email: email });
+  
+      if (!user) {
+        return res.status(404).json("No record exists");
+      }
+  
+      if (user.password !== password) {
+        return res.status(400).json("Incorrect password");
+      }
+  
+      res.json("success");
+    } catch (err) {
+      console.error("Error during login:", err);
+      res.status(500).json("Server error");
+    }
+  });
+  
+
 
 app.listen(PORT, () => {
   console.log("App started!");
