@@ -1,10 +1,21 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 
 const Summary = () => {
+
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    // Retrieve the username from localStorage (or you can use context/state)
+    const storedUserName = localStorage.getItem('userName');
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
+  }, []);
   return (
     <>
       <div className="username">
-        <h6>Hi, User!</h6>
+      <h6>Hi, {userName ? userName : 'User'}!</h6> 
         <hr className="divider" />
       </div>
 
