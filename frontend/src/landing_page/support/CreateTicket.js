@@ -65,7 +65,7 @@ function CreateTicket() {
           <br />
           <a href="" style={{textDecoration:"none",lineHeight:"2.5"}}>NRI Account Opening</a>
           <br />
-          <a href="" style={{textDecoration:"none",lineHeight:"2.5"}}>Charges at Zerodha</a>
+          <a href="" style={{textDecoration:"none",lineHeight:"2.5"}}>Charges at MarketUp</a>
           <br />
           <a href="" style={{textDecoration:"none",lineHeight:"2.5"}}>Zerodha IDFC FIRST Bank</a>
           <br />

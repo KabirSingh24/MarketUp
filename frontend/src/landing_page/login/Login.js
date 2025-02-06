@@ -525,7 +525,10 @@ const LoginPage = () => {
     axios.post('http://localhost:3002/login', { email, password })
       .then(result => {
         if (result.data === "success") {
-          navigate('/');
+          const userName = result.data.username;  // Assuming the API returns the username
+        localStorage.setItem('userName', userName);
+          window.location.href = 'http://localhost:3001';
+          // navigate('http://localhost:3001');
         } else {
           alert(result.data);
         }
